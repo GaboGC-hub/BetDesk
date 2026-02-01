@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+    container_name: betdesk_backend
+    environment:
+      DATABASE_URL: postgres://betdesk:betdesk@db:5432/betdesk
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./betting-dashboard-frontend
+      dockerfile: Dockerfile
+    container_name: betdesk_frontend
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8000
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+
+  db:
+    image: postgres:16
+    container_name: betdesk_db
+    environment:
+      POSTGRES_USER: betdesk
+      POSTGRES_PASSWORD: betdesk
+      POSTGRES_DB: betdesk
+    ports:
+      - "5432:5432"
+    volumes:
+      - betdesk_pg:/var/lib/postgresql/data
+
+volumes:
+  betdesk_pg:

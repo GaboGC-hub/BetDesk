@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Alertas</title></head>
+<body>
+  <h1>Alertas (hora Cali)</h1>
+  <table border="1" cellpadding="6">
+    <tr>
+      <th>ID</th><th>Sport</th><th>League</th><th>Event</th><th>Start (Cali)</th>
+      <th>Market</th><th>Line</th><th>Sel</th><th>Book</th><th>Odds</th>
+      <th>Reason</th><th>Score</th><th>Sent</th>
+    </tr>
+    {% for a in alerts %}
+    <tr>
+      <td>{{a.id}}</td><td>{{a.sport}}</td><td>{{a.league}}</td><td>{{a.event}}</td>
+      <td>{{a.start_time_cali}}</td>
+      <td>{{a.market}}</td><td>{{a.line}}</td><td>{{a.selection}}</td>
+      <td>{{a.bookmaker}}</td><td>{{a.odds}}</td>
+      <td>{{a.reason}}</td><td>{{a.score}}</td><td>{{a.sent_at_utc}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
